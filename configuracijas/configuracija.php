@@ -34,7 +34,7 @@ if ($_POST['ienakt'])
 		if (mysql_num_rows($dati) == 1) 
 		{
 			$mani_dati = mysql_fetch_array($dati);
-			$_SESSION['ienakt'] = true;
+			$_SESSION['ienacis'] = true; //labojums bija kluda :)
 			
 			$_SESSION['vards'] = $mani_dati['vards'];
 		}
@@ -43,6 +43,5 @@ if ($_POST['ienakt'])
 	{
 		$ienakt_neizdevas = true;
 	}
-	
 }
 ?>
