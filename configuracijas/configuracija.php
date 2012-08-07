@@ -30,17 +30,18 @@ if ($_POST['ienakt'])
 	{
 		$dati = mysql_query("SELECT * FROM lietotaji WHERE vards= '{$vards}' AND kods = '{$kods} limit 1' ");
 		
-		if ($_SESSION['ienacis'])
-		{
-			$lietotaja_ifnromacija = mysql_fetch_array($dati);
-			
-			$_SESSION['infor'] = true;
 		
-		}
-		else
+		if (mysql_num_rows($dati) == 1) 
 		{
-			$ienakt_neizdevas = true;
+			$mani_dati = mysql_fetch_array($dati);
+			$_SESSION['ienakt'] = true;
+			
+			$_SESSION['vards'] = $mani_dati['vards'];
 		}
+	}
+	else 
+	{
+		$ienakt_neizdevas = true;
 	}
 	
 }
