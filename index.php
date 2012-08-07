@@ -1,18 +1,33 @@
 <?php
 require 'configuracijas/configuracija.php';
 
-if ($_SESSION['ienacis'])
-{
-	echo $_SESSION['vards'];
-}
-else 
-{
-	echo "Ludzu ienac sistema";
-        echo "<form name='input' method='post'>
-            LietotÃ„ï¿½jvÃ„ï¿½rds: <input type='text' name='vards' /></br />
-            Parole: <input type='password' name='kods' /><br />
-            <input type='submit' name='ienakt' value='IenÃ„ï¿½kt' />
-        </form>";
-}	
+$test = sha1("test");
+#echo $test;
+	
+	if ($ienakt_neizdevas)
+	{
+		echo "vards vai kods nepareizs";
+	}
+	
+	if (!$_SESSION['ienacis'])
+	{
+	        echo "
+	        	<form name='input' method='post'>
+	        		
+	            <label>Lietotâja Vârds:</label>
+	        		<input type='text' name='vards' /></br />
+	            <label>Parole:</label> 
+	       	  		<input type='password' name='kods' /><br />
+	        		
+	            <input type='submit' name='ienakt' value='ienakt' />
+	        </form>";
+	}
+	else
+	{
+		echo $_SESSION['vards']."<br><a href='?iziet=ja'>Iziet</a>";
+	}
+
+	#print_r($dati);
+        	
 
 ?>
