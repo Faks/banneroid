@@ -8,10 +8,10 @@ if ($_SESSION['ienacis'])
 else 
 {
 	echo "Ludzu ienac sistema";
-        echo "<form name='input' action='configuracijas/configuracija.php' method='post'>
-            Lietotājvārds: <input type='text' name='vards' /></br />
+        echo "<form name='input' method='post'>
+            LietotÄ�jvÄ�rds: <input type='text' name='vards' /></br />
             Parole: <input type='password' name='kods' /><br />
-            <input type='submit' name='ienakt' value='Ienākt' />
+            <input type='submit' name='ienakt' value='IenÄ�kt' />
         </form>";
 }	
 
