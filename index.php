@@ -9,8 +9,8 @@ echo '<!DOCTYPE html>
 <body>';
 require 'configuracijas/configuracija.php';
 
-$test = sha1("test");
-#echo $test;
+//$test = sha1("test");
+//echo $test;
 	
 	if (isset($ienakt_neizdevas))
 	{
@@ -30,9 +30,15 @@ $test = sha1("test");
 	}
 	else
 	{
-		echo $_SESSION['vards']."<br /><a href='?iziet=ja'>Iziet</a>";
+            echo "<div>",$_SESSION['vards'],"<br /><a href='?iziet=ja'>Iziet</a></div>";
+            $pages = scandir('pages/');
+            unset($pages[0],$pages[1]);
+            if(isset($_GET['sadala']) && in_array("{$_GET['sadala']}.php",$pages)){
+                $included = true; // taisot jaunu sadaļu vajag pārbaudīt vai iet caur indexu
+                include 'pages/'.$_GET['sadala'].'.php'; 
+            }
 	}
-
+        
 	#print_r($dati);
         	
 echo '</body>
