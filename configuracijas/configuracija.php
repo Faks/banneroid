@@ -14,6 +14,43 @@ if(isset($_GET['iziet'])){
     }
 }
 
+if(isset($_POST['reg'])){
+    if(empty($_POST['vards'])||empty($_POST['parole'])||empty($_POST['parole2']))
+    {
+        echo 'Jāaizpilda visi lauki';
+    }
+    else
+    {
+        $vards = $_POST['vards'];
+        $vards = mysql_real_escape_string($_POST['vards']);
+        $vards = htmlspecialchars($_POST['vards']);
+        $parole = mysql_real_escape_string($_POST['parole']);
+        $parole = htmlspecialchars($_POST['parole']);
+        $parole = sha1($_POST['parole']);
+        $parole2 = mysql_real_escape_string($_POST['parole2']);
+        $parole2 = htmlspecialchars($_POST['parole2']);
+        $parole2 = sha1($_POST['parole2']);
+        if($parole==$parole2){
+            $varda_parbaude=mysql_query("SELECT `vards` FROM `lietotaji` WHERE `vards`='{$vards}'");
+            if(mysql_num_rows($varda_parbaude) > 0)
+            {
+                echo 'Šis lietotāj vārds ir aizņemts!';
+            }
+            else 
+            {
+                $datums=date('Y-m-d H:i:s');
+                mysql_query("INSERT INTO `lietotaji`(`vards`, `kods`, `pievienojas`, `limenis`)VALUES('{$vards}','{$parole}','{$datums}','lietotajs')");
+                echo 'Reģistrācija veiksmīga tagad variet ielogoties sistēmā!<br />';
+            }
+        }
+        else
+        {
+            echo 'Parole nesakrīt';
+        }
+    }
+    
+}
+
 if (isset($_POST['ienakt'])) 
 {
 	//drosibas filtrs bazisks nau nekads pasaules brinums
@@ -31,7 +68,7 @@ if (isset($_POST['ienakt']))
             $ienakt_neizdevas = true;
         }
         
-	$panem_kodu = mysql_query("SELECT * FROM lietotaji WHERE vards = '{$_POST['vards']}' ") or die(mysql_error());
+	$panem_kodu = mysql_query("SELECT * FROM lietotaji WHERE vards = '{$vards}' ") or die(mysql_error());
 	if (mysql_num_rows($panem_kodu) != 0)
 	{
             $parbauda_kodu = mysql_fetch_array($panem_kodu);

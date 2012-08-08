@@ -1,17 +1,15 @@
-/* 
-    Document   : style.css
-    Created on : 2012.8.8, 10:06:26
-    Author     : graetz
-    Description:
-        Purpose of the stylesheet follows.
-*/
+#register{
+    width: 260px;
+    margin-left: 500px;
+}
+#register label{
+    float:left;
+    padding-bottom: 2px;
+}
+#register input{
+    float:right;
+}
 #login{
     width: 150px;
-    padding-left: 500px;
-}
-#login label{
-
-}
-#login input{
-
+    margin-left: 500px;
 }
