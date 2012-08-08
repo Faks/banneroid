@@ -72,11 +72,6 @@ if (isset($_POST['ienakt']))
 	if (mysql_num_rows($panem_kodu) > 0)
 	{
             $parbauda_kodu = mysql_fetch_array($panem_kodu);
-	}
-	else 
-	{
-            $ienakt_neizdevas = true;
-	}
         
             if ($kods == $parbauda_kodu['kods']) #te bija kluda labota jau
             {
@@ -89,11 +84,16 @@ if (isset($_POST['ienakt']))
 
                         $_SESSION['vards'] = $mani_dati['vards'];
                     }
-            }
+            }            
             else 
             {
                 $ienakt_neizdevas = true;
             }
+        }
+        else 
+        {
+            $ienakt_neizdevas = true;
+        }
 
 }
 }
