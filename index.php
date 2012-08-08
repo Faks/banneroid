@@ -19,14 +19,27 @@ require 'configuracijas/configuracija.php';
 	
 	if (!isset($_SESSION['ienacis']))
 	{
+            if(isset($_GET['register']))
+            {
+                echo "<div id='register'>
+                <form name='input' method='post'>
+                    <label>Lietotāja vārds:</label><input type='text' name='vards' /></br />
+                    <label>Parole:</label><input type='password' name='parole' /></br />
+                    <label>Velreiz parole:</label><input type='password' name='parole2' /></br />
+                    <input type='submit' name='reg' value='Reģistrēties' />
+                </form>
+                </div>";
+            }
+            else{
 	        echo "
                 <div id='login'>
 	        <form name='input' method='post'>	
 	            <label>Lietotāja Vārds:</label><input type='text' name='vards' /></br />
 	            <label>Parole:</label><input type='password' name='kods' /><br />	
-	            <input type='submit' name='ienakt' value='Ienākt' />
+	            <input type='submit' name='ienakt' value='Ienākt' /><a href='?register'>Reģistrēties</a>
 	        </form>
                 </div>";
+            }
 	}
 	else
 	{
