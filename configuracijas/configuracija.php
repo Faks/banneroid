@@ -17,14 +17,19 @@ if(isset($_GET['iziet'])){
 if (isset($_POST['ienakt'])) 
 {
 	//drosibas filtrs bazisks nau nekads pasaules brinums
-	$vards = $_POST['vards'];
-	$vards = mysql_real_escape_string($_POST['vards']);
-	$vards = htmlspecialchars($_POST['vards']);
+        if(!empty($_POST['vards']) || !empty($_POST['kods'])){
+            $vards = $_POST['vards'];
+            $vards = mysql_real_escape_string($_POST['vards']);
+            $vards = htmlspecialchars($_POST['vards']);
 
-	$kods = mysql_real_escape_string($_POST['kods']);
-	$kods = htmlspecialchars($_POST['kods']);
-	$kods = sha1($_POST['kods']);
-	
+            $kods = mysql_real_escape_string($_POST['kods']);
+            $kods = htmlspecialchars($_POST['kods']);
+            $kods = sha1($_POST['kods']);
+        }
+        else
+        {
+            $ienakt_neizdevas = true;
+        }
 	$panem_kodu = mysql_query("SELECT * FROM lietotaji WHERE vards = '{$_POST['vards']}' ") or die(mysql_error());
 	if (mysql_num_rows($panem_kodu) != 0)
 	{
@@ -34,8 +39,7 @@ if (isset($_POST['ienakt']))
 	{
 		$ienakt_neizdevas = true;
 	}
-	
-	
+	if(!empty($_POST['kods'])){
 	if ($kods == $parbauda_kodu['kods']) #te bija kluda labota jau
 	{
 		$dati = mysql_query("SELECT * FROM lietotaji WHERE vards= '".$vards."' AND kods = '".$kods."' limit 1 ") or die(mysql_error()); #kluda labota bija gluks
@@ -49,6 +53,11 @@ if (isset($_POST['ienakt']))
 		}
 	}
 	else 
+	{
+		$ienakt_neizdevas = true;
+	}
+        }
+        else 
 	{
 		$ienakt_neizdevas = true;
 	}
