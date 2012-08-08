@@ -6,14 +6,15 @@
 session_start();
 
 require 'mysql_konekcija.php';
-
-if ($_GET['iziet'] == "ja") 
-{
+if(isset($_GET['iziet'])){
+    if ($_GET['iziet'] == "ja") 
+    {
 	session_destroy();
 	unset($_SESSION);
+    }
 }
 
-if ($_POST['ienakt']) 
+if (isset($_POST['ienakt'])) 
 {
 	//drosibas filtrs bazisks nau nekads pasaules brinums
 	$vards = $_POST['vards'];
