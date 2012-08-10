@@ -8,3 +8,7 @@ if ((int)$_GET['id'])
 		header('Location: /?sadala=izvada_bannerus'); #nedarbojas ka vajaga hmm
 	}
 }
+else 
+{
+	header('Location: ./');
+}
