@@ -9,5 +9,5 @@ if ((int)$_GET['id'])
 }
 else
 {
-	echo "id missinmgs";
+	header('Location: ./');
 }
