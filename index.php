@@ -43,7 +43,7 @@ require 'configuracijas/configuracija.php';
 	}
 	else
 	{
-            echo "<div>",$_SESSION['vards'],"<br /><a href='?iziet=ja'>Iziet</a></div> <a href='?sadala=pievienot' title='Patlaban Nedarbojas Rit ies'>Pievienot Bannerus</a> <a href='?sadala=izvada_bannerus'>Izvada Bannerus</a><br>";
+            echo "<div>",$_SESSION['vards'],"<br /><a href='?iziet=ja'>Iziet</a></div> <a href='?sadala=pievienot'>Pievienot Bannerus</a> <a href='?sadala=izvada_bannerus'>Izvada Bannerus</a> <a href='?sadala=lietotoju_bannerus'>Lietoju Bannerus</a><br>";
             $pages = scandir('pages/');
             unset($pages[0],$pages[1]);
             if(isset($_GET['sadala']) && in_array("{$_GET['sadala']}.php",$pages)){
