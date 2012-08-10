@@ -6,15 +6,31 @@ if($included){
         while($bildes_skaititajs = mysql_fetch_array($select_bildes_skaititaju))
         {
 
-                    echo "<div class='pagination'>".$bildes_skaititajs['bannera_kods'].'<br>bilde izvadas<br />';
+                    echo "<img src='{$bildes_skaititajs['bannera_kods']}'><br>";
+                    
+                    if ($_SESSION['vards'] == $bildes_skaititajs['autors']) 
+                    {
+                    	echo "<a href='?sadala=dzest_banneri&id={$bildes_skaititajs['id']}&autors={$bildes_skaititajs['autors']}'>Dzest Bildi</a>";
+                    }
+                    else
+                    {
+                    	$parbauda_vai_jau_lieto_panem = mysql_query("SELECT * FROM bannera_sistema_lietotaji WHERE bannera_id = '".$bildes_skaititajs["id"]."' AND lietotajs = '".$_SESSION["vards"]."' ") or die(mysql_error());
+                    	$parbauda_vai_jau_lieto = mysql_fetch_array($parbauda_vai_jau_lieto_panem);
+	                    	if ($parbauda_vai_jau_lieto['lietotajs'] != $_SESSION['vards']) 
+	                    	{
+	                    		echo "<a href='?sadala=pievienot_lietot_banneri&id={$bildes_skaititajs['id']}&autors={$bildes_skaititajs['autors']}'>Lietot Bildi</a>";
+	                    	}
+	                    	else
+	                    	{
+	                    		echo "Jau Lietoju Bildi";
+	                    	}
+                    }	
+                    	
 
                     $select_counter_bildes = mysql_query("SELECT COUNT(id) FROM bannera_sistema_lietotaji WHERE bannera_id = '".$bildes_skaititajs['id']."' ") or die(mysql_error());
                     $counter_bildes = mysql_fetch_array($select_counter_bildes);
 
-                    echo 'Izvada ka ciparus<br>bildi izmanto '.$counter_bildes['COUNT(id)'].' cilveki<br />';
-
-                    echo "<br>Izvada cik lieto kad uzbrauc bildes<br><a href='http://faks.sytes.net'><img src='http://faks.sytes.net/ics.gif' width='88' height='31' title='bildi izmanto {$counter_bildes['COUNT(id)']} cilveki' /></a><br />";
-
+                    echo '<br>bildi izmanto '.$counter_bildes['COUNT(id)'].' cilveki<br />';
         }
     }
     else
